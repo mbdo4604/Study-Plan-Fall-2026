@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050508">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="مذاكرة">
+<title>خطة المذاكرة — Mohamed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Bebas+Neue&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050508;--bg2:#08090f;
+  --glass:rgba(255,255,255,0.032);--glass2:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --fire:#ff4d1c;--gold:#ffd166;--electric:#00d4ff;--neon:#39ff14;--rose:#ff2d6b;
+  --text:#f0f0ff;--muted:rgba(240,240,255,0.45);--dim:rgba(240,240,255,0.2);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Tajawal',sans-serif;min-height:100vh;overflow-x:hidden;padding-bottom:140px}
+
+/* BG */
+.bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.1;animation:orbFloat 22s ease-in-out infinite}
+.orb1{width:700px;height:700px;background:var(--fire);top:-250px;right:-200px;animation-delay:0s}
+.orb2{width:500px;height:500px;background:var(--electric);bottom:-150px;left:-150px;animation-delay:-8s}
+.orb3{width:350px;height:350px;background:var(--gold);top:45%;left:35%;animation-delay:-16s;opacity:0.06}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(50px,-70px) scale(1.08)}66%{transform:translate(-35px,45px) scale(0.93)}}
+.bg-canvas::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);background-size:55px 55px}
+
+.app{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:0 16px}
+
+/* HERO */
+.hero{padding:56px 0 36px;text-align:center;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,77,28,0.12);border:1px solid rgba(255,77,28,0.3);color:var(--fire);font-size:0.75rem;font-weight:700;letter-spacing:2px;padding:6px 16px;border-radius:99px;margin-bottom:22px;text-transform:uppercase;animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,77,28,0.3)}50%{box-shadow:0 0 0 8px rgba(255,77,28,0)}}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,10vw,5.5rem);letter-spacing:3px;line-height:0.95;background:linear-gradient(135deg,#fff 0%,var(--gold) 50%,var(--fire) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;animation:fadeUp 0.7s cubic-bezier(.16,1,.3,1) both}
+.hero-sub{color:var(--muted);font-size:0.88rem;font-weight:500;animation:fadeUp 0.7s 0.1s cubic-bezier(.16,1,.3,1) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* COUNTDOWN */
+.hero-countdown{display:inline-flex;align-items:center;gap:14px;margin-top:26px;background:var(--glass);border:1px solid var(--border2);border-radius:20px;padding:14px 28px;backdrop-filter:blur(20px);animation:fadeUp 0.7s 0.25s cubic-bezier(.16,1,.3,1) both}
+.cnt-block{text-align:center}
+.cnt-num{font-family:'Bebas Neue',monospace;font-size:2.6rem;line-height:1;color:var(--fire);display:block;text-shadow:0 0 24px rgba(255,77,28,0.5)}
+.cnt-lbl{font-size:0.62rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.cnt-sep{font-size:1.8rem;color:var(--border2);padding-top:4px}
+
+/* ── INSTALL SECTION ── */
+.install-section{
+  margin-bottom:20px;
+  animation:fadeUp 0.7s 0.35s cubic-bezier(.16,1,.3,1) both;
+}
+
+/* Always-visible install button */
+.install-main-btn{
+  width:100%;padding:15px 20px;
+  border-radius:16px;border:none;cursor:pointer;
+  background:linear-gradient(135deg,rgba(255,209,102,0.12),rgba(255,77,28,0.1));
+  border:1px solid rgba(255,209,102,0.3);
+  font-family:'Tajawal',sans-serif;
+  display:flex;align-items:center;gap:14px;
+  transition:all 0.2s;
+  position:relative;overflow:hidden;
+}
+.install-main-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,209,102,0.06),transparent);opacity:0;transition:opacity 0.2s}
+.install-main-btn:hover::before{opacity:1}
+.install-main-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,209,102,0.15)}
+.install-main-btn:active{transform:scale(0.99)}
+.install-icon-big{font-size:1.8rem;flex-shrink:0}
+.install-texts{flex:1;text-align:right}
+.install-title{display:block;font-size:0.95rem;font-weight:800;color:var(--gold)}
+.install-subtitle{display:block;font-size:0.76rem;color:var(--muted);margin-top:2px}
+.install-arrow{
+  background:linear-gradient(135deg,var(--gold),var(--fire));
+  border:none;border-radius:10px;padding:8px 16px;
+  font-family:'Tajawal',sans-serif;font-size:0.82rem;font-weight:800;
+  color:#000;cursor:pointer;white-space:nowrap;flex-shrink:0;
+}
+
+/* iOS specific instructions */
+.ios-steps{
+  display:none;
+  background:rgba(255,209,102,0.05);border:1px solid rgba(255,209,102,0.15);
+  border-radius:12px;padding:14px 16px;margin-top:10px;
+  font-size:0.82rem;color:var(--muted);line-height:1.8;
+}
+.ios-steps.show{display:block}
+.ios-steps strong{color:var(--gold)}
+
+/* Android Chrome prompt */
+.android-prompt{
+  display:none;
+  align-items:center;gap:12px;
+  background:rgba(57,255,20,0.05);border:1px solid rgba(57,255,20,0.2);
+  border-radius:12px;padding:12px 16px;margin-top:10px;
+  font-size:0.82rem;color:var(--neon);
+}
+.android-prompt.show{display:flex}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;animation:fadeUp 0.7s 0.4s cubic-bezier(.16,1,.3,1) both}
+.stat-card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:16px 10px;text-align:center;backdrop-filter:blur(12px);transition:border-color 0.2s,transform 0.2s;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.03),transparent);border-radius:inherit}
+.stat-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.3rem;display:block;line-height:1;margin-bottom:4px}
+.sn-fire{color:var(--fire);text-shadow:0 0 18px rgba(255,77,28,0.4)}
+.sn-gold{color:var(--gold);text-shadow:0 0 18px rgba(255,209,102,0.4)}
+.sn-elec{color:var(--electric);text-shadow:0 0 18px rgba(0,212,255,0.4)}
+.stat-lbl{font-size:0.7rem;color:var(--muted);font-weight:500}
+
+/* MASTER PROGRESS */
+.master-progress{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin-bottom:18px;backdrop-filter:blur(12px);animation:fadeUp 0.7s 0.45s cubic-bezier(.16,1,.3,1) both}
+.mp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.mp-title{font-size:0.83rem;font-weight:800;letter-spacing:0.5px}
+.mp-pct{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;background:linear-gradient(90deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.track{height:9px;background:rgba(255,255,255,0.05);border-radius:99px;overflow:hidden;position:relative}
+.track::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 19px,rgba(0,0,0,0.25) 19px,rgba(0,0,0,0.25) 20px)}
+.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--fire),#ff8c42,var(--gold));transition:width 0.7s cubic-bezier(.16,1,.3,1);box-shadow:0 0 10px rgba(255,77,28,0.5);position:relative;z-index:1}
+
+/* SUBJECTS */
+.subjects-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:22px;animation:fadeUp 0.7s 0.5s cubic-bezier(.16,1,.3,1) both}
+.subj-card{background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:13px 14px;backdrop-filter:blur(12px);transition:border-color 0.2s}
+.subj-card:hover{border-color:var(--border2)}
+.subj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.subj-name{font-size:0.76rem;font-weight:800}
+.subj-pct{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--muted)}
+.subj-track{height:4px;background:rgba(255,255,255,0.05);border-radius:99px;overflow:hidden}
+.subj-fill{height:100%;border-radius:99px;transition:width 0.6s ease}
+
+/* QUOTE */
+.quote-strip{background:linear-gradient(135deg,rgba(255,77,28,0.07),rgba(255,209,102,0.04));border:1px solid rgba(255,77,28,0.14);border-radius:14px;padding:18px 20px;margin-bottom:20px;text-align:center;cursor:pointer;animation:fadeUp 0.7s 0.55s cubic-bezier(.16,1,.3,1) both;transition:border-color 0.2s}
+.quote-strip:hover{border-color:rgba(255,77,28,0.25)}
+.quote-text{font-size:0.95rem;font-weight:800;line-height:1.55;background:linear-gradient(90deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.quote-hint{font-size:0.68rem;color:var(--dim);margin-top:6px}
+
+/* EXPORT ALL */
+.export-wrap{margin-bottom:22px;animation:fadeUp 0.7s 0.6s cubic-bezier(.16,1,.3,1) both}
+.export-btn{width:100%;padding:15px;border-radius:14px;border:1px solid rgba(0,212,255,0.22);background:rgba(0,212,255,0.05);font-family:'Tajawal',sans-serif;font-size:0.93rem;font-weight:800;color:var(--electric);letter-spacing:0.5px;display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.2s;cursor:pointer;position:relative;overflow:hidden}
+.export-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,0.07),transparent);opacity:0;transition:opacity 0.2s}
+.export-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,212,255,0.18)}
+.export-btn:hover::before{opacity:1}
+.export-btn:active{transform:scale(0.98)}
+
+/* TABS */
+.tabs-wrap{display:flex;gap:8px;margin-bottom:18px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;animation:fadeUp 0.7s 0.65s cubic-bezier(.16,1,.3,1) both}
+.tabs-wrap::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:8px 18px;border-radius:99px;border:1px solid var(--border);background:var(--glass);color:var(--muted);font-family:'Tajawal',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap;backdrop-filter:blur(8px)}
+.tab:hover{border-color:var(--border2);color:var(--text)}
+.tab.active{background:linear-gradient(135deg,var(--fire),#ff8c42);border-color:transparent;color:#fff;box-shadow:0 4px 18px rgba(255,77,28,0.33)}
+
+/* PHASE DIVIDER */
+.phase-div{display:flex;align-items:center;gap:12px;margin:22px 0 12px}
+.phase-div::before,.phase-div::after{content:'';flex:1;height:1px;background:var(--border)}
+.phase-div span{font-size:0.65rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+
+/* DAY CARDS */
+.day-card{background:var(--glass);border:1px solid var(--border);border-radius:18px;margin-bottom:9px;overflow:hidden;backdrop-filter:blur(12px);transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s;animation:cardIn 0.4s cubic-bezier(.16,1,.3,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.day-card:hover{border-color:var(--border2);transform:translateY(-1px)}
+.day-card.today-card{border-color:rgba(255,77,28,0.38);box-shadow:0 0 0 1px rgba(255,77,28,0.09),0 8px 28px rgba(255,77,28,0.07)}
+.day-card.exam-card{border-color:rgba(255,45,107,0.32)}
+.day-card.holiday-card{border-color:rgba(255,209,102,0.28)}
+.day-card.done-card{opacity:0.48}
+
+.day-header{display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;user-select:none}
+.day-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--dim)}
+.day-dot.today-dot{background:var(--neon);box-shadow:0 0 7px var(--neon)}
+.day-dot.exam-dot{background:var(--rose);box-shadow:0 0 7px var(--rose)}
+.day-dot.holiday-dot{background:var(--gold);box-shadow:0 0 7px var(--gold)}
+.day-dot.oral-dot{background:var(--neon);box-shadow:0 0 7px var(--neon)}
+.day-date-lbl{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--dim);min-width:46px}
+.day-name-lbl{font-weight:800;font-size:0.9rem;flex:1}
+.day-badge{font-size:0.63rem;font-weight:800;padding:3px 9px;border-radius:99px;flex-shrink:0;letter-spacing:0.3px}
+.exam-b{background:rgba(255,45,107,0.11);color:var(--rose);border:1px solid rgba(255,45,107,0.22)}
+.holiday-b{background:rgba(255,209,102,0.09);color:var(--gold);border:1px solid rgba(255,209,102,0.18)}
+.oral-b{background:rgba(57,255,20,0.07);color:var(--neon);border:1px solid rgba(57,255,20,0.18)}
+.day-prog-lbl{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--dim);min-width:26px;text-align:left}
+.chev{color:var(--dim);font-size:0.58rem;transition:transform 0.22s;flex-shrink:0}
+.day-card.open .chev{transform:rotate(180deg)}
+
+.day-mini-bar{height:2px;background:rgba(255,255,255,0.04);margin:0 16px;border-radius:99px;overflow:hidden}
+.day-mini-fill{height:100%;background:linear-gradient(90deg,var(--fire),var(--gold));border-radius:99px;transition:width 0.4s ease}
+
+/* SESSIONS */
+.sess-body{display:none;padding:4px 16px 14px;border-top:1px solid var(--border)}
+.day-card.open .sess-body{display:block}
+
+.sess-row{display:flex;align-items:flex-start;gap:11px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.035)}
+.sess-row:last-of-type{border-bottom:none}
+
+.chk{width:21px;height:21px;border-radius:6px;border:1.5px solid rgba(255,255,255,0.1);background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.18s;margin-top:1px}
+.chk:hover{border-color:var(--fire);box-shadow:0 0 7px rgba(255,77,28,0.28)}
+.chk.on{background:linear-gradient(135deg,var(--fire),#ff8c42);border-color:transparent;box-shadow:0 2px 10px rgba(255,77,28,0.38)}
+.chk.on::after{content:'✓';color:#fff;font-size:11px;font-weight:900}
+
+.si{flex:1}
+.si-time{font-family:'JetBrains Mono',monospace;font-size:0.63rem;color:var(--fire);font-weight:700;margin-bottom:3px;letter-spacing:0.5px}
+.si-task{font-size:0.86rem;font-weight:600;line-height:1.42;color:var(--text)}
+.si-task.done{text-decoration:line-through;color:var(--dim)}
+.si-chip{display:inline-block;font-size:0.63rem;font-weight:800;padding:2px 7px;border-radius:99px;margin-top:4px;letter-spacing:0.3px}
+
+.c-ode {background:rgba(124,109,250,0.11);color:#a89cff;border:1px solid rgba(124,109,250,0.18)}
+.c-phys{background:rgba(255,45,107,0.09); color:#ff6b9d;border:1px solid rgba(255,45,107,0.18)}
+.c-opt {background:rgba(57,255,20,0.07);  color:#39ff14;border:1px solid rgba(57,255,20,0.14)}
+.c-atom{background:rgba(255,209,102,0.09);color:#ffd166;border:1px solid rgba(255,209,102,0.18)}
+.c-chem{background:rgba(0,212,255,0.07);  color:#00d4ff;border:1px solid rgba(0,212,255,0.14)}
+.c-algo{background:rgba(255,77,28,0.09);  color:#ff6b3d;border:1px solid rgba(255,77,28,0.18)}
+
+.cal-day-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:9px 14px;border-radius:11px;border:1px solid rgba(0,212,255,0.18);background:rgba(0,212,255,0.04);color:var(--electric);font-family:'Tajawal',sans-serif;font-size:0.78rem;font-weight:800;cursor:pointer;transition:all 0.2s;width:100%}
+.cal-day-btn:hover{background:rgba(0,212,255,0.09);border-color:rgba(0,212,255,0.3);transform:translateY(-1px)}
+
+.holiday-inner{padding:18px 16px;display:none}
+.day-card.open .holiday-inner{display:block}
+.holiday-box{text-align:center;padding:20px;background:rgba(255,209,102,0.04);border-radius:12px;border:1px dashed rgba(255,209,102,0.18)}
+.h-emoji{font-size:2.8rem;display:block;margin-bottom:8px}
+.h-txt{color:var(--gold);font-weight:700;font-size:0.9rem}
+
+/* TOAST */
+.toast{position:fixed;bottom:calc(env(safe-area-inset-bottom,0px) + 20px);left:50%;transform:translateX(-50%) translateY(90px);background:rgba(8,9,15,0.95);backdrop-filter:blur(20px);border:1px solid rgba(57,255,20,0.28);color:var(--neon);padding:11px 22px;border-radius:13px;font-size:0.83rem;font-weight:700;transition:transform 0.3s cubic-bezier(.16,1,.3,1);z-index:9999;white-space:nowrap;box-shadow:0 8px 30px rgba(0,0,0,0.5)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.07);border-radius:2px}
+
+@media(max-width:480px){.hero h1{font-size:3rem}.hero-countdown{padding:11px 18px;gap:11px}.cnt-num{font-size:2.1rem}.subjects-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div class="bg-canvas">
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+</div>
+
+<div class="app">
+
+  <div class="hero">
+    <div class="hero-badge">🔥 وقت الجد</div>
+    <h1>STUDY<br>HARD</h1>
+    <p class="hero-sub">خطة المذاكرة الكاملة — Mohamed | فصل الربيع 2026</p>
+    <div class="hero-countdown">
+      <div class="cnt-block"><span class="cnt-num" id="cD">--</span><span class="cnt-lbl">يوم</span></div>
+      <span class="cnt-sep">:</span>
+      <div class="cnt-block"><span class="cnt-num" id="cH">--</span><span class="cnt-lbl">ساعة</span></div>
+      <span class="cnt-sep">:</span>
+      <div class="cnt-block"><span class="cnt-num" id="cM">--</span><span class="cnt-lbl">دقيقة</span></div>
+    </div>
+  </div>
+
+  <!-- INSTALL SECTION -->
+  <div class="install-section">
+    <button class="install-main-btn" id="installMainBtn" onclick="handleInstall()">
+      <span class="install-icon-big">📲</span>
+      <div class="install-texts">
+        <strong class="install-title">ثبّت التطبيق على الشاشة الرئيسية</strong>
+        <span class="install-subtitle" id="installSubtitle">اضغط هنا للتثبيت كأبليكيشن حقيقي</span>
+      </div>
+      <span class="install-arrow">ثبّت</span>
+    </button>
+    <div class="ios-steps" id="iosSteps">
+      📱 على iPhone/iPad:<br>
+      1️⃣ اضغط على <strong>زرار Share</strong> (السهم للأعلى) في Safari<br>
+      2️⃣ اضغط على <strong>"Add to Home Screen"</strong><br>
+      3️⃣ اضغط <strong>Add</strong> — وهيظهر على الشاشة زي أبليكيشن!
+    </div>
+    <div class="android-prompt" id="androidPrompt">
+      <span>✅</span>
+      <span>اضغط "ثبّت" في النافذة اللي ظهرت!</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card"><span class="stat-num sn-fire" id="sDone">0</span><span class="stat-lbl">خلصت</span></div>
+    <div class="stat-card"><span class="stat-num sn-gold" id="sLeft">0</span><span class="stat-lbl">باقي</span></div>
+    <div class="stat-card"><span class="stat-num sn-elec" id="sDays">--</span><span class="stat-lbl">يوم للامتحان</span></div>
+  </div>
+
+  <div class="master-progress">
+    <div class="mp-top"><span class="mp-title">🎯 التقدم الكلي</span><span class="mp-pct" id="mpPct">0%</span></div>
+    <div class="track"><div class="fill" id="mpFill" style="width:0%"></div></div>
+  </div>
+
+  <div class="subjects-grid" id="subjGrid"></div>
+
+  <div class="quote-strip" id="quoteEl" onclick="nextQuote()">
+    <div class="quote-text" id="quoteText"></div>
+    <div class="quote-hint">اضغط للتغيير ✦</div>
+  </div>
+
+  <div class="export-wrap">
+    <button class="export-btn" onclick="exportAll()">
+      <span>📅</span><span>أضف كل الجدول للتقويم دفعة واحدة</span><span style="font-size:1.1rem">←</span>
+    </button>
+  </div>
+
+  <div class="tabs-wrap" id="tabsWrap"></div>
+  <div id="cards"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════
+// DATA
+// ═══════════════════════════════════
+const SUBS={
+  ODE: {n:'ODE',          c:'c-ode', h:'#7c6dfa'},
+  PHYS:{n:'Modern Physics',c:'c-phys',h:'#ff6b9d'},
+  OPT: {n:'Modern Optics', c:'c-opt', h:'#39ff14'},
+  ATOM:{n:'Atomic Physics',c:'c-atom',h:'#ffd166'},
+  CHEM:{n:'Inorganic Chem',c:'c-chem',h:'#00d4ff'},
+  ALGO:{n:'Algorithms',    c:'c-algo',h:'#ff6b3d'},
+};
+
+const QUOTES=[
+  'النجاح مش بيجي لمن يتمناه — بيجي لمن يصحى كل يوم ويعمله.',
+  'كل محاضرة بتخلصها دي خطوة جوّت التاريخ اللي بتبنيه لنفسك.',
+  'الفرق بينك وبين غيرك إنك بتذاكر وهم مش بيذاكروا.',
+  'الـ Atomic اللي مش عارف فيه حاجة دي فرصتك تبهر نفسك.',
+  'بعد الامتحانات دي هيبقى عندك سيرة تحكيها.',
+  'مش لازم تكون مستعد 100% — ابدأ وهتتعلم في الطريق.',
+  'كل session بتعملها دي استثمار في النسخة الجاية منك.',
+  'الصعب هيبقى سهل بعد ما تعمله كتير — ابدأ دلوقتي.',
+];
+let qIdx=Math.floor(Math.random()*QUOTES.length);
+
+const SCH=[
+  {d:'2026-05-01',n:'الجمعة',s:[{t:'صبح',k:'ODE Ch.1 كامل — الأساسيات',b:'ODE'},{t:'ضهر',k:'ODE Ch.2 ج1 — الدرجة الأولى',b:'ODE'},{t:'ليل',k:'ODE Ch.2 ج2 + حل أسئلة',b:'ODE'}]},
+  {d:'2026-05-02',n:'السبت',s:[{t:'صبح',k:'ODE Ch.3 ج1 — أكثر من الدرجة الأولى',b:'ODE'},{t:'ضهر',k:'🔴 مذاكرة شفوي كيميا',b:'CHEM'},{t:'ليل',k:'🔴 مذاكرة شفوي كيميا',b:'CHEM'}]},
+  {d:'2026-05-03',n:'الأحد',type:'oral',badge:'شفوي كيميا',s:[{t:'صبح',k:'🎯 امتحان شفوي كيميا',b:'CHEM'},{t:'ضهر',k:'ODE Ch.3 ج2',b:'ODE'},{t:'ليل',k:'ODE Ch.4 — Laplace ج1',b:'ODE'}]},
+  {d:'2026-05-04',n:'الاثنين',s:[{t:'صبح',k:'ODE Ch.4 — Laplace ج2',b:'ODE'},{t:'ضهر',k:'ODE Ch.5 — Applications + Laplace',b:'ODE'},{t:'ليل',k:'Modern Physics L1-L2',b:'PHYS'}]},
+  {d:'2026-05-05',n:'الثلاثاء',s:[{t:'صبح',k:'Modern Physics L3-L4',b:'PHYS'},{t:'ضهر',k:'Modern Physics L5-L6',b:'PHYS'},{t:'ليل',k:'Modern Physics L7 + أسئلة الدكتور',b:'PHYS'}]},
+  {d:'2026-05-06',n:'الأربعاء',s:[{t:'صبح',k:'Modern Optics L1-L2',b:'OPT'},{t:'ضهر',k:'Modern Optics L3-L4',b:'OPT'},{t:'ليل',k:'Modern Optics L5-L6',b:'OPT'}]},
+  {d:'2026-05-07',n:'الخميس',s:[{t:'صبح',k:'Modern Optics L7-L8',b:'OPT'},{t:'ضهر',k:'Modern Optics L9 + أسئلة Serway',b:'OPT'},{t:'ليل',k:'Atomic Physics L1-L2',b:'ATOM'}]},
+  {d:'2026-05-08',n:'الجمعة',s:[{t:'صبح',k:'Atomic Physics L3-L4',b:'ATOM'},{t:'ضهر',k:'🔴 مذاكرة عملي Algorithms',b:'ALGO'},{t:'ليل',k:'🔴 مذاكرة عملي Algorithms',b:'ALGO'}]},
+  {d:'2026-05-09',n:'السبت',s:[{t:'صبح',k:'🔴 مذاكرة عملي Algorithms',b:'ALGO'},{t:'ضهر',k:'🔴 مذاكرة عملي Algorithms',b:'ALGO'},{t:'ليل',k:'استرح — نام بدري',b:'ALGO'}]},
+  {d:'2026-05-10',n:'الأحد',type:'oral',badge:'عملي Algorithms',s:[{t:'صبح',k:'🎯 امتحان عملي Algorithms',b:'ALGO'},{t:'ضهر',k:'Atomic Physics L5-L6',b:'ATOM'},{t:'ليل',k:'Atomic Physics L7-L8',b:'ATOM'}]},
+  {d:'2026-05-11',n:'الاثنين',s:[{t:'صبح',k:'Atomic Physics L9 + مراجعة Atomic',b:'ATOM'},{t:'ضهر',k:'Inorganic Chemistry L1-L2',b:'CHEM'},{t:'ليل',k:'Inorganic Chemistry L3-L4',b:'CHEM'}]},
+  {d:'2026-05-12',n:'الثلاثاء',s:[{t:'صبح',k:'Inorganic Chemistry L5-L6',b:'CHEM'},{t:'ضهر',k:'Inorganic Chemistry L7-L8',b:'CHEM'},{t:'ليل',k:'Algorithms L1-L2',b:'ALGO'}]},
+  {d:'2026-05-13',n:'الأربعاء',s:[{t:'صبح',k:'Algorithms L3-L4 (فيديو)',b:'ALGO'},{t:'ضهر',k:'Algorithms L5-L6 (فيديو)',b:'ALGO'},{t:'ليل',k:'Algorithms L7-L8',b:'ALGO'}]},
+  {d:'2026-05-14',n:'الخميس',s:[{t:'صبح',k:'Algorithms L9 + مراجعة Algorithms',b:'ALGO'},{t:'ضهر',k:'مراجعة ODE Ch.1-2',b:'ODE'},{t:'ليل',k:'مراجعة ODE Ch.3',b:'ODE'}]},
+  {d:'2026-05-15',n:'الجمعة',s:[{t:'صبح',k:'مراجعة ODE Ch.4-5 + Laplace',b:'ODE'},{t:'ضهر',k:'حل أسئلة ODE',b:'ODE'},{t:'ليل',k:'حل أسئلة ODE — امتحانات سابقة',b:'ODE'}]},
+  {d:'2026-05-16',n:'السبت',s:[{t:'صبح',k:'مراجعة Modern Physics ج1',b:'PHYS'},{t:'ضهر',k:'مراجعة Modern Physics ج2 + أسئلة',b:'PHYS'},{t:'ليل',k:'مراجعة Modern Optics ج1',b:'OPT'}]},
+  {d:'2026-05-17',n:'الأحد',s:[{t:'صبح',k:'مراجعة Modern Optics ج2',b:'OPT'},{t:'ضهر',k:'مراجعة Atomic Physics ج1',b:'ATOM'},{t:'ليل',k:'مراجعة Atomic Physics ج2',b:'ATOM'}]},
+  {d:'2026-05-18',n:'الاثنين',s:[{t:'صبح',k:'مراجعة Inorganic Chemistry ج1',b:'CHEM'},{t:'ضهر',k:'مراجعة Inorganic Chemistry ج2',b:'CHEM'},{t:'ليل',k:'مراجعة Algorithms ج1',b:'ALGO'}]},
+  {d:'2026-05-19',n:'الثلاثاء',s:[{t:'صبح',k:'مراجعة Algorithms ج2',b:'ALGO'},{t:'ضهر',k:'حل أسئلة شاملة — كل المواد',b:'ODE'},{t:'ليل',k:'حل أسئلة شاملة — كل المواد',b:'ODE'}]},
+  {d:'2026-05-20',n:'الأربعاء',s:[{t:'صبح',k:'مراجعة ODE نهائية',b:'ODE'},{t:'ضهر',k:'حل أسئلة ODE — امتحانات سابقة',b:'ODE'},{t:'ليل',k:'حل أسئلة ODE — امتحانات سابقة',b:'ODE'}]},
+  {d:'2026-05-21',n:'الخميس',s:[{t:'صبح',k:'مراجعة ODE نهائية',b:'ODE'},{t:'ضهر',k:'حل أسئلة ODE',b:'ODE'},{t:'ليل',k:'استرح بدري',b:'ODE'}]},
+  {d:'2026-05-22',n:'الجمعة',s:[{t:'صبح',k:'مراجعة ODE خفيفة — أهم formulas',b:'ODE'},{t:'ضهر',k:'استرح — المخ محتاج راحة',b:'ODE'},{t:'ليل',k:'نام بدري جداً',b:'ODE'}]},
+  {d:'2026-05-23',n:'السبت',s:[{t:'صبح',k:'أهم formulas ODE — 30 دقيقة بس',b:'ODE'},{t:'ضهر',k:'استرح تماماً',b:'ODE'},{t:'ليل',k:'نام مبكر جداً — غداً أول امتحان',b:'ODE'}]},
+  // EXAMS
+  {d:'2026-05-24',n:'الأحد',type:'exam',badge:'امتحان ODE 🎯',s:[{t:'صبح',k:'🎯 امتحان Differential Equations',b:'ODE'},{t:'ضهر',k:'مراجعة Atomic Physics — بعد الامتحان',b:'ATOM'},{t:'ليل',k:'مراجعة Algorithms',b:'ALGO'}]},
+  {d:'2026-05-25',n:'الاثنين',s:[{t:'صبح',k:'مراجعة Atomic Physics ج2',b:'ATOM'},{t:'ضهر',k:'مراجعة Algorithms ج2',b:'ALGO'},{t:'ليل',k:'مراجعة Atomic + Algorithms نهائية',b:'ATOM'}]},
+  {d:'2026-05-26',n:'الثلاثاء',s:[{t:'صبح',k:'مراجعة Modern Physics ج1',b:'PHYS'},{t:'ضهر',k:'مراجعة Modern Physics ج2',b:'PHYS'},{t:'ليل',k:'حل أسئلة Modern Physics',b:'PHYS'}]},
+  {d:'2026-05-27',n:'الأربعاء',type:'holiday',badge:'🏖️ أول يوم عيد',s:[]},
+  {d:'2026-05-28',n:'الخميس',type:'holiday',badge:'🏖️ ثاني يوم عيد',s:[]},
+  {d:'2026-05-29',n:'الجمعة',s:[{t:'صبح',k:'مراجعة Modern Physics',b:'PHYS'},{t:'ضهر',k:'مراجعة Modern Physics + أسئلة',b:'PHYS'},{t:'ليل',k:'حل أسئلة Modern Physics',b:'PHYS'}]},
+  {d:'2026-05-30',n:'السبت',s:[{t:'صبح',k:'مراجعة Modern Physics نهائية',b:'PHYS'},{t:'ضهر',k:'حل أسئلة Modern Physics',b:'PHYS'},{t:'ليل',k:'استرح بدري',b:'PHYS'}]},
+  {d:'2026-06-01',n:'الاثنين',s:[{t:'صبح',k:'مراجعة Modern Physics أهم نقاط',b:'PHYS'},{t:'ضهر',k:'حل أسئلة Modern Physics',b:'PHYS'},{t:'ليل',k:'نام بدري — غداً امتحان',b:'PHYS'}]},
+  {d:'2026-06-02',n:'الثلاثاء',type:'exam',badge:'امتحان Modern Physics 🎯',s:[{t:'صبح',k:'🎯 امتحان Modern Physics',b:'PHYS'},{t:'ضهر',k:'مراجعة Modern Optics ج1',b:'OPT'},{t:'ليل',k:'مراجعة Modern Optics ج2',b:'OPT'}]},
+  {d:'2026-06-03',n:'الأربعاء',s:[{t:'صبح',k:'مراجعة Modern Optics + أسئلة Serway',b:'OPT'},{t:'ضهر',k:'حل أسئلة Modern Optics',b:'OPT'},{t:'ليل',k:'نام بدري',b:'OPT'}]},
+  {d:'2026-06-04',n:'الخميس',type:'exam',badge:'امتحان Modern Optics 🎯',s:[{t:'صبح',k:'🎯 امتحان Modern Optics',b:'OPT'},{t:'ضهر',k:'مراجعة Algorithms ج1',b:'ALGO'},{t:'ليل',k:'مراجعة Algorithms ج2',b:'ALGO'}]},
+  {d:'2026-06-05',n:'الجمعة',s:[{t:'صبح',k:'مراجعة Algorithms + أسئلة',b:'ALGO'},{t:'ضهر',k:'حل أسئلة Algorithms',b:'ALGO'},{t:'ليل',k:'نام بدري',b:'ALGO'}]},
+  {d:'2026-06-06',n:'السبت',s:[{t:'صبح',k:'مراجعة Algorithms نهائية',b:'ALGO'},{t:'ضهر',k:'حل أسئلة Algorithms',b:'ALGO'},{t:'ليل',k:'نام بدري — غداً امتحان',b:'ALGO'}]},
+  {d:'2026-06-07',n:'الأحد',type:'exam',badge:'امتحان Algorithms 🎯',s:[{t:'صبح',k:'🎯 امتحان Algorithms',b:'ALGO'},{t:'ضهر',k:'مراجعة Atomic Physics ج1',b:'ATOM'},{t:'ليل',k:'مراجعة Atomic Physics ج2',b:'ATOM'}]},
+  {d:'2026-06-08',n:'الاثنين',s:[{t:'صبح',k:'مراجعة Atomic Physics + أسئلة',b:'ATOM'},{t:'ضهر',k:'حل أسئلة Atomic',b:'ATOM'},{t:'ليل',k:'نام بدري',b:'ATOM'}]},
+  {d:'2026-06-09',n:'الثلاثاء',type:'exam',badge:'امتحان Atomic Physics 🎯',s:[{t:'صبح',k:'🎯 امتحان Atomic Physics',b:'ATOM'},{t:'ضهر',k:'مراجعة Inorganic Chemistry ج1',b:'CHEM'},{t:'ليل',k:'مراجعة Inorganic Chemistry ج2',b:'CHEM'}]},
+  {d:'2026-06-10',n:'الأربعاء',s:[{t:'صبح',k:'مراجعة Inorganic Chemistry + أسئلة',b:'CHEM'},{t:'ضهر',k:'حل أسئلة Inorganic',b:'CHEM'},{t:'ليل',k:'نام بدري — آخر امتحان غداً',b:'CHEM'}]},
+  {d:'2026-06-11',n:'الخميس',type:'exam',badge:'آخر امتحان 🏆',s:[{t:'صبح',k:'🎯 امتحان Inorganic Chemistry',b:'CHEM'},{t:'ضهر',k:'🎉 خلصت كل الامتحانات!',b:'CHEM'},{t:'ليل',k:'🎉 احتفل — أنت استاهلت!',b:'CHEM'}]},
+];
+
+// ═══════════════════════════════════
+// STATE
+// ═══════════════════════════════════
+const KEY='study_v4';
+let ST={};
+try{ST=JSON.parse(localStorage.getItem(KEY))||{};}catch{}
+function save(){localStorage.setItem(KEY,JSON.stringify(ST));}
+function sk(d,i){return d+'_'+i;}
+function isOn(d,i){return !!ST[sk(d,i)];}
+function isRest(k){return /استرح|نام|🎉/.test(k);}
+
+// ═══════════════════════════════════
+// COUNTDOWN
+// ═══════════════════════════════════
+function tick(){
+  const diff=Math.max(0,new Date('2026-05-24T09:00:00')-new Date());
+  document.getElementById('cD').textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('cH').textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
+  document.getElementById('cM').textContent=String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+}
+tick(); setInterval(tick,30000);
+
+// ═══════════════════════════════════
+// STATS
+// ═══════════════════════════════════
+function calcStats(){
+  let tot=0,done=0; const sd={},st={};
+  SCH.forEach(day=>day.s.forEach((s,i)=>{
+    if(isRest(s.k))return;
+    tot++;st[s.b]=(st[s.b]||0)+1;
+    if(isOn(day.d,i)){done++;sd[s.b]=(sd[s.b]||0)+1;}
+  }));
+  return {tot,done,sd,st};
+}
+
+function refreshStats(){
+  const {tot,done,sd,st}=calcStats();
+  const pct=tot?Math.round(done/tot*100):0;
+  document.getElementById('sDone').textContent=done;
+  document.getElementById('sLeft').textContent=tot-done;
+  const tgt=new Date('2026-05-24');tgt.setHours(0,0,0,0);
+  const now=new Date();now.setHours(0,0,0,0);
+  document.getElementById('sDays').textContent=Math.max(0,Math.ceil((tgt-now)/86400000));
+  document.getElementById('mpPct').textContent=pct+'%';
+  document.getElementById('mpFill').style.width=pct+'%';
+  // subjects
+  document.getElementById('subjGrid').innerHTML=Object.entries(SUBS).map(([k,s])=>{
+    const t=st[k]||0,d=sd[k]||0,p=t?Math.round(d/t*100):0;
+    return `<div class="subj-card"><div class="subj-top"><span class="subj-name">${s.n}</span><span class="subj-pct">${p}%</span></div><div class="subj-track"><div class="subj-fill" style="width:${p}%;background:${s.h};box-shadow:0 0 6px ${s.h}55"></div></div></div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════
+// TOGGLE
+// ═══════════════════════════════════
+function toggleSess(date,i){
+  ST[sk(date,i)]=!ST[sk(date,i)]; save();
+  const box=document.getElementById('c_'+date+'_'+i);
+  const txt=document.getElementById('t_'+date+'_'+i);
+  if(box)box.className='chk'+(ST[sk(date,i)]?' on':'');
+  if(txt)txt.className='si-task'+(ST[sk(date,i)]?' done':'');
+  updateDayBar(date);
+  refreshStats();
+  if(ST[sk(date,i)])toast('🔥 Session خلصت! استمر');
+}
+
+function updateDayBar(date){
+  const day=SCH.find(d=>d.d===date); if(!day)return;
+  const real=day.s.filter(s=>!isRest(s.k));
+  const done=real.filter((s,i)=>isOn(date,i)).length;
+  const el=document.getElementById('prog_'+date);
+  if(el)el.textContent=real.length?done+'/'+real.length:'';
+  const bar=document.getElementById('pbar_'+date);
+  if(bar)bar.style.width=real.length?(done/real.length*100)+'%':'0%';
+  const card=document.getElementById('card_'+date);
+  if(card){
+    if(real.length>0&&done===real.length)card.classList.add('done-card');
+    else card.classList.remove('done-card');
+  }
+}
+
+// ═══════════════════════════════════
+// ICS EXPORT — FIXED FORMAT
+// ═══════════════════════════════════
+const TIME_SLOTS={صبح:['080000','110000'],ضهر:['130000','160000'],ليل:['200000','230000']};
+
+function escICS(str){
+  // RFC 5545 text escaping
+  return str.replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+}
+
+function foldLine(line){
+  // RFC 5545: lines MUST be max 75 octets, folded with CRLF + SPACE
+  const bytes=new TextEncoder().encode(line);
+  if(bytes.length<=75)return line;
+  const parts=[];let cur='',len=0;
+  for(const ch of line){
+    const chBytes=new TextEncoder().encode(ch).length;
+    if(len+chBytes>75&&cur){parts.push(cur);cur=' '+ch;len=1+chBytes;}
+    else{cur+=ch;len+=chBytes;}
+  }
+  if(cur)parts.push(cur);
+  return parts.join('\r\n');
+}
+
+function makeICS(events){
+  const CRLF='\r\n';
+  const now=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+  const lines=[
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Mohamed StudyTracker//AR',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'X-WR-CALNAME:خطة المذاكرة 2026',
+    'X-WR-TIMEZONE:Africa/Cairo',
+  ];
+  events.forEach(ev=>{
+    lines.push('BEGIN:VEVENT');
+    lines.push('UID:'+ev.uid+'@studytracker2026');
+    lines.push('DTSTAMP:'+now);
+    lines.push('DTSTART;TZID=Africa/Cairo:'+ev.start);
+    lines.push('DTEND;TZID=Africa/Cairo:'+ev.end);
+    lines.push('SUMMARY:'+escICS(ev.title));
+    lines.push('DESCRIPTION:'+escICS(ev.desc));
+    lines.push('STATUS:CONFIRMED');
+    lines.push('TRANSP:OPAQUE');
+    lines.push('END:VEVENT');
+  });
+  lines.push('END:VCALENDAR');
+  // fold long lines + CRLF
+  return lines.map(foldLine).join(CRLF)+CRLF;
+}
+
+function buildEvents(days){
+  const events=[];
+  days.forEach(day=>{
+    if(day.type==='holiday')return;
+    day.s.forEach((s,i)=>{
+      if(isRest(s.k))return;
+      const d=day.d.replace(/-/g,'');
+      const [st,en]=TIME_SLOTS[s.t]||['080000','110000'];
+      events.push({
+        uid:day.d.replace(/-/g,'')+'_'+i,
+        start:d+'T'+st,
+        end:d+'T'+en,
+        title:s.k,
+        desc:'المادة: '+(SUBS[s.b]?.n||s.b)+' | الوقت: '+s.t,
+      });
+    });
+  });
+  return events;
+}
+
+function downloadICS(icsContent,filename){
+  // Use data URI instead of blob URL for better iOS compatibility
+  const encoded=encodeURIComponent(icsContent);
+  const dataUri='data:text/calendar;charset=utf-8,'+encoded;
+  const a=document.createElement('a');
+  a.href=dataUri; a.download=filename; a.click();
+}
+
+function exportAll(){
+  const events=buildEvents(SCH);
+  const ics=makeICS(events);
+  downloadICS(ics,'schedule_2026.ics');
+  toast('📅 تم تحميل الملف — افتحه لإضافة كل الجدول!');
+}
+
+function exportDay(date,dayName){
+  const day=SCH.find(d=>d.d===date); if(!day)return;
+  const events=buildEvents([day]);
+  if(!events.length){toast('مفيش sessions في اليوم ده');return;}
+  const ics=makeICS(events);
+  downloadICS(ics,'study_'+date+'.ics');
+  toast('📅 تم — افتح الملف لإضافته للتقويم');
+}
+
+// ═══════════════════════════════════
+// INSTALL — PWA
+// ═══════════════════════════════════
+let deferredPrompt=null;
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.MSStream;
+const isStandalone=window.matchMedia('(display-mode:standalone)').matches||navigator.standalone;
+
+// Set install button subtitle based on platform
+const subtitle=document.getElementById('installSubtitle');
+if(isStandalone){
+  subtitle.textContent='✅ التطبيق مثبّت بالفعل!';
+} else if(isIOS){
+  subtitle.textContent='Safari: Share ← Add to Home Screen';
+} else {
+  subtitle.textContent='اضغط للتثبيت على شاشتك الرئيسية';
+}
+
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault(); deferredPrompt=e;
+  document.getElementById('androidPrompt').classList.add('show');
+  subtitle.textContent='Chrome جاهز للتثبيت — اضغط الزرار!';
+});
+
+window.addEventListener('appinstalled',()=>{
+  subtitle.textContent='✅ تم التثبيت بنجاح!';
+  document.getElementById('androidPrompt').classList.remove('show');
+  toast('🎉 التطبيق اتثبت على الشاشة الرئيسية!');
+});
+
+function handleInstall(){
+  if(isStandalone){toast('✅ التطبيق مثبّت بالفعل!');return;}
+  if(isIOS){
+    const steps=document.getElementById('iosSteps');
+    steps.classList.toggle('show');
+    return;
+  }
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(r=>{
+      deferredPrompt=null;
+      if(r.outcome==='accepted'){
+        subtitle.textContent='✅ جاري التثبيت...';
+        document.getElementById('androidPrompt').classList.remove('show');
+      }
+    });
+  } else {
+    // Chrome but no prompt yet — give instructions
+    toast('افتح الـ app في Chrome وانتظر بانر التثبيت');
+  }
+}
+
+// ═══════════════════════════════════
+// QUOTE
+// ═══════════════════════════════════
+function nextQuote(){
+  qIdx=(qIdx+1)%QUOTES.length;
+  document.getElementById('quoteText').textContent=QUOTES[qIdx];
+}
+document.getElementById('quoteText').textContent=QUOTES[qIdx];
+
+// ═══════════════════════════════════
+// RENDER CARDS
+// ═══════════════════════════════════
+const TABS=[{id:'today',l:'📍 اليوم'},{id:'prepare',l:'⚡ إقفال المواد'},{id:'exams',l:'🎯 الامتحانات'},{id:'all',l:'📋 الكل'}];
+let activeTab='today';
+
+function renderTabs(){
+  document.getElementById('tabsWrap').innerHTML=TABS.map(t=>
+    `<button class="tab${t.id===activeTab?' active':''}" onclick="setTab('${t.id}')">${t.l}</button>`
+  ).join('');
+}
+
+function today(){return new Date().toISOString().split('T')[0];}
+
+function renderCards(){
+  const cur=today();
+  const con=document.getElementById('cards');
+  con.innerHTML='';
+  let list=SCH;
+  if(activeTab==='prepare')list=SCH.filter(d=>d.d<='2026-05-23');
+  else if(activeTab==='exams')list=SCH.filter(d=>d.d>='2026-05-24');
+  else if(activeTab==='today'){
+    list=SCH.filter(d=>d.d===cur);
+    if(!list.length)list=SCH.filter(d=>d.d>=cur).slice(0,3);
+  }
+  let lastPhase='';
+  list.forEach((day,ci)=>{
+    const phase=day.d<='2026-05-23'?'prepare':'exams';
+    if(activeTab==='all'&&phase!==lastPhase){
+      const dv=document.createElement('div');
+      dv.className='phase-div';
+      dv.innerHTML=`<span>${phase==='prepare'?'إقفال المواد — 1 مايو إلى 23 مايو':'مرحلة الامتحانات'}</span>`;
+      con.appendChild(dv);lastPhase=phase;
+    }
+    const isToday=day.d===cur;
+    const real=day.s.filter(s=>!isRest(s.k));
+    const doneN=real.filter((s,i)=>isOn(day.d,i)).length;
+    const pp=real.length?doneN/real.length*100:0;
+    const allDone=real.length>0&&doneN===real.length;
+
+    const dotCl=day.type==='exam'?'exam-dot':day.type==='holiday'?'holiday-dot':day.type==='oral'?'oral-dot':isToday?'today-dot':'';
+    let bdg='';
+    if(day.badge){const bc=day.type==='exam'?'exam-b':day.type==='holiday'?'holiday-b':'oral-b';bdg=`<span class="day-badge ${bc}">${day.badge}</span>`;}
+    const cc=`day-card${isToday?' today-card':''}${day.type==='exam'?' exam-card':day.type==='holiday'?' holiday-card':''}${allDone?' done-card':''}`;
+    const dl=day.d.slice(5).split('-').reverse().join('/');
+
+    const card=document.createElement('div');
+    card.className=cc; card.id='card_'+day.d;
+    card.style.animationDelay=(ci*0.035)+'s';
+
+    let body='';
+    if(day.type==='holiday'){
+      body=`<div class="holiday-inner"><div class="holiday-box"><span class="h-emoji">🌙✨🎊</span><div class="h-txt">عيد أضحى مبارك — استرح واستمتع بالعيد مع أهلك!</div></div></div>`;
+    } else {
+      const rows=day.s.map((s,i)=>{
+        const on=isOn(day.d,i);const rest=isRest(s.k);
+        return `<div class="sess-row">
+          ${!rest?`<div class="chk${on?' on':''}" id="c_${day.d}_${i}" onclick="toggleSess('${day.d}',${i})"></div>`:'<div style="width:21px;flex-shrink:0"></div>'}
+          <div class="si">
+            <div class="si-time">${s.t}</div>
+            <div class="si-task${on?' done':''}" id="t_${day.d}_${i}">${s.k}</div>
+            <span class="si-chip ${SUBS[s.b]?.c||''}">${SUBS[s.b]?.n||''}</span>
+          </div>
+        </div>`;
+      }).join('');
+      body=`<div class="sess-body">${rows}<button class="cal-day-btn" onclick="exportDay('${day.d}','${day.n}')">📅 أضف ${day.n} للتقويم</button></div>`;
+    }
+
+    card.innerHTML=`
+      <div class="day-header" onclick="toggleCard('${day.d}')">
+        <div class="day-dot ${dotCl}"></div>
+        <span class="day-date-lbl">${dl}</span>
+        <span class="day-name-lbl">${day.n}${isToday?' 👈':''}</span>
+        ${bdg}
+        <span class="day-prog-lbl" id="prog_${day.d}">${real.length?doneN+'/'+real.length:''}</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="day-mini-bar"><div class="day-mini-fill" id="pbar_${day.d}" style="width:${pp}%"></div></div>
+      ${body}`;
+
+    con.appendChild(card);
+    if(isToday||(activeTab==='today'&&ci===0))card.classList.add('open');
+  });
+}
+
+window.setTab=function(id){activeTab=id;renderTabs();renderCards();};
+window.toggleCard=function(d){document.getElementById('card_'+d)?.classList.toggle('open');};
+window.toggleSess=toggleSess;
+window.exportDay=exportDay;
+window.exportAll=exportAll;
+window.handleInstall=handleInstall;
+window.nextQuote=nextQuote;
+
+// TOAST
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2800);
+}
+
+// INIT
+renderTabs();
+renderCards();
+refreshStats();
+</script>
+</body>
+</html>
